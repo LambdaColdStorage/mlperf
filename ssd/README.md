@@ -2,11 +2,14 @@
 
 ### Prepare data
 
+```
+cd implementations/pytorch
+./download_dataset.sh
+```
 
 ### Build Docker Image
 
 ```
-cd implementations/pytorch
 docker build --pull -t mlperf-lambda:ssd .
 ```
 
