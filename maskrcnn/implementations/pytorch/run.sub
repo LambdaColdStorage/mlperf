@@ -2,25 +2,26 @@
 #SBATCH -p mlperf		# partition
 #SBATCH -N 1       		# number of nodes
 #SBATCH -t 12:00:00		# wall time
-#SBATCH -J single_stage_detector	# job name
+#SBATCH -J object_detection	# job name
 #SBATCH --exclusive   		# exclusive node access
 #SBATCH --mem=0   		# all mem avail
 #SBATCH --mail-type=FAIL        # only send email on failure
-#SBATCH --ntasks-per-node=8	# n tasks per machine (one task per gpu)
-#SBATCH --threads-per-core=2	# HT is on
-#SBATCH --cores-per-socket=20	# 20 cores on each socket 
+#SBATCH --ntasks-per-node=2	# n tasks per machine (one task per gpu)
+#SBATCH --threads-per-core=1	# HT is on
+#SBATCH --cores-per-socket=10	# 20 cores on each socket 
+
 
 DATESTAMP=${DATESTAMP:-`date +'%y%m%d%H%M%S%N'`}
 
 ## Data, container and volumes
-BENCHMARK=${BENCHMARK:-"ssd"}
-BENCHMARK_NAME="SSD"
-CONT=${CONT:-"mlperf-nvidia:$BENCHMARK"}
-DATADIR=${DATADIR:-"/home/data/mlperf/object_detection/coco-2017"} # there should be ./coco2017 and ./torchvision dirs in here
+BENCHMARK=${BENCHMARK:-"maskrcnn"}
+BENCHMARK_NAME="MASKRCNN"
+CONT=${CONT:-"mlperf-lambda:$BENCHMARK"}
+DATADIR=${DATADIR:-"/home/data/mlpef/object_detection/coco-2017"}
 LOGDIR=${LOGDIR:-"/home/ubuntu/benchmarks/mlperf/$BENCHMARK"}
 NEXP=${NEXP:-5} # Default number of times to run the benchmark
 SYSLOGGING=1
-SYS_LOG_GET="'import mlperf_compliance; from mlperf_log_utils import mlperf_submission_log; mlperf_submission_log(mlperf_compliance.constants.$BENCHMARK_NAME)'"
+SYS_LOG_GET="'import mlperf_compliance; from maskrcnn_benchmark.utils.mlperf_logger import mlperf_submission_log; mlperf_submission_log(mlperf_compliance.constants.$BENCHMARK_NAME)'"
 
 ## DO NOT CHANGE ANYTHING BELOW -- DL params are in run_and_time.sh and config_<system>.sh files 
 
@@ -54,11 +55,10 @@ mkdir -p $(dirname "${LOGFILE_BASE}")
 
 ## Docker params
 CONTVOLS="-v $DATADIR:/data -v $LOGDIR:/results"
-NV_GPU="${NVIDIA_VISIBLE_DEVICES:-$(seq 0 $((${SLURM_NTASKS_PER_NODE:-${LAMBDANGPU}}-1)) | tr '\n' ',' | sed 's/,$//')}"
-DOCKEREXEC="env NV_GPU=${NV_GPU} nvidia-docker run --init --rm --net=host --uts=host --ipc=host --ulimit stack=67108864 --ulimit memlock=-1 --name=cont_${SLURM_JOB_ID} --security-opt seccomp=unconfined $IBDEVICES"
+DOCKEREXEC="nvidia-docker run --rm --net=host --uts=host --ipc=host --ulimit stack=67108864 --ulimit memlock=-1 --name=cont_${SLURM_JOB_ID} --security-opt seccomp=unconfined $IBDEVICES"
 
-## Get version of the OS
-export MLPERF_HOST_OS="$(cat /etc/issue | head -1 | cut -f1-3 -d" ") / $(cat /etc/LAMBDA-release | grep -E "LAMBDA_PRETTY_NAME|LAMBDA_OTA_VERSION" |cut -f2 -d= |cut -f2 -d '"' |paste -sd' ')"
+export MLPERF_HOST_OS="$(cat /etc/issue | head -1 | cut -f1-3 -d" ") / $(cat /etc/dgx-release | grep -E "LAMBDA_PRETTY_NAME|LAMBDA_OTA_VERSION" |cut -f2 -d= |cut -f2 -d '"' |paste -sd' ')"
+echo "${MLPERF_HOST_OS}"
 
 ## Prep run and launch
 MASTER_IP=`getent hosts \`hostname\` | cut -d ' ' -f1`
@@ -99,7 +99,7 @@ success=$? ; if [ $success -ne 0 ]; then echo "ERR: Base container launch failed
 # Launch containers
 pids=(); rets=()
 for hostn in ${hosts[@]}; do
-  $(eval echo $SSH) $DOCKEREXEC $CONTVOLS $CONT sleep infinity &
+  $(eval echo $SSH) $DOCKEREXEC -e SLURM_NNODES=$SLURM_NNODES $CONTVOLS $CONT sleep infinity &
   pids+=($!); rets+=($?);
 done
 success=0; for s in ${rets[@]}; do ((success+=s)); done ; if [ $success -ne 0 ]; then echo "ERR: Container launch failed."; exit $success ; fi
@@ -119,10 +119,10 @@ for nrun in `seq 1 $NEXP`; do
   (
     echo "Beginning trial $nrun of $NEXP"
 
-      export VARS=(
-         "-e" "SLURM_NNODES=$SLURM_NNODES"
-         "-e" "MLPERF_HOST_OS"
-      )
+    export VARS=(
+        "-e" "SLURM_NNODES=$SLURM_NNODES"
+        "-e" "MLPERF_HOST_OS"
+    )
 
     if [[ $SYSLOGGING -eq 1 ]]; then
         VARS_STR="${VARS[@]}"
@@ -133,17 +133,17 @@ for nrun in `seq 1 $NEXP`; do
         fi
     fi
 
-
   ## Clear RAM cache dentries and inodes
     echo "Clearing caches"
     LOG_COMPLIANCE="'import mlperf_compliance; mlperf_compliance.mlperf_log.mlperf_print(mlperf_compliance.constants.CACHE_CLEAR, value=True, stack_offset=0)'"
+
   pids=(); rets=()
   for hostn in ${hosts[@]}; do
       if [[ $INSLURM -eq 1 ]]; then
         $(eval echo $SSH) bash -c 'sync && sudo /sbin/sysctl vm.drop_caches=3' && \
         $(eval echo $SSH) docker exec cont_${SLURM_JOB_ID} python -c $LOG_COMPLIANCE &
       else
-        docker run --init --rm --privileged --entrypoint bash $CONT -c "sync && echo 3 > /proc/sys/vm/drop_caches && python -c $LOG_COMPLIANCE || exit 1" &
+        docker run --rm --privileged --entrypoint bash $CONT -c "sync && echo 3 > /proc/sys/vm/drop_caches && python -c $LOG_COMPLIANCE || exit 1" &
       fi
     pids+=($!); rets+=($?);
   done
@@ -166,6 +166,7 @@ for nrun in `seq 1 $NEXP`; do
          "-e" "MULTI_NODE=$MULTI_NODE"
          "-e" "SLURM_JOB_ID=$SLURM_JOB_ID"
          "-e" "SLURM_NTASKS_PER_NODE=$SLURM_NTASKS_PER_NODE"
+         "-e" "SLURM_NNODES=$SLURM_NNODES"
       )
       # Execute command
       set -x
@@ -183,4 +184,3 @@ done
 if [[ $INSLURM -eq 0 ]]; then
   docker rm -f cont_${SLURM_JOB_ID}
 fi
-
