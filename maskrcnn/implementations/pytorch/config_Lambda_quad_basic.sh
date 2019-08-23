@@ -3,7 +3,7 @@
 ## DL params
 EXTRA_PARAMS=""
 EXTRA_CONFIG=(
-               "SOLVER.BASE_LR"       "0.06"
+               "SOLVER.BASE_LR"       "0.03"
                "SOLVER.MAX_ITER"      "80000"
                "SOLVER.WARMUP_FACTOR" "0.000096"
                "SOLVER.WARMUP_ITERS"  "625"
