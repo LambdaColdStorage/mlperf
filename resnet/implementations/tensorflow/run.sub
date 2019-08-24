@@ -1,0 +1,56 @@
+#!/bin/bash
+
+DATESTAMP=${DATESTAMP:-`date +'%y%m%d%H%M%S%N'`}
+
+## Data, container and volumes
+BENCHMARK=${BENCHMARK:-"resnet"}
+BENCHMARK_NAME="RESNET"
+CONT=${CONT:-"mlperf-lambda:$BENCHMARK"}
+DATADIR=${DATADIR:-"/home/ubuntu/data/mlperf/$BENCHMARK"}
+LOGDIR=${LOGDIR:-"/home/ubuntu/benchmarks/mlperf/$BENCHMARK"}
+NEXP=${NEXP:-10} # Default number of times to run the benchmark
+SEED=${SEED:-$(od -A n -t d -N 3 /dev/urandom)} # Allows passing SEED in, which is helpful if NEXP=1 ; for NEXP>1 we need to pick different seeds for subsequent runs
+
+export SEED
+export NEXP
+
+## Load system-specific parameters for benchmark
+LAMBDASYSTEM=${LAMBDASYSTEM:-"LAMBDA1"}
+if [[ ! -f "config_${LAMBDASYSTEM}.sh" ]]; then
+  echo "Unknown system, assuming LAMBDA1"
+  LAMBDASYSTEM="LAMBDA1"
+fi
+source config_${LAMBDASYSTEM}.sh
+
+## Docker params
+CONTVOLS="-v $DATADIR:/data -v $LOGDIR:/results"
+NV_GPU="${NVIDIA_VISIBLE_DEVICES:-$(seq 0 $((${SLURM_NTASKS_PER_NODE:-${LAMBDANGPU}}-1)) | tr '\n' ',' | sed 's/,$//')}"
+
+DOCKEREXEC="env NV_GPU=${NV_GPU} nvidia-docker run --init --rm --net=host --uts=host --ipc=host --ulimit stack=67108864 --ulimit memlock=-1 --name=cont_${SLURM_JOB_ID} --security-opt seccomp=unconfined $IBDEVICES"
+
+# Create results directory
+LOGFILE_BASE="${LOGDIR}/${DATESTAMP}"
+mkdir -p $(dirname "${LOGFILE_BASE}")
+
+
+for nrun in `seq 1 $NEXP`; do
+  (
+    echo "Beginning trial $nrun of $NEXP"
+    
+    export DOCKERENV=(
+      "-e" "LAMBDASYSTEM=$LAMBDASYSTEM"
+      "-e" "SEED=$SEED"
+      "-e" "LAMBDANGPU=$LAMBDANGPU"
+      "-e" "TRAIN_BATCH_SIZE=$TRAIN_BATCH_SIZE"
+    )
+    
+    set -x
+    # docker exec "${DOCKERENV[@]}" ./run_and_time.sh |& tee ${LOGFILE_BASE}_$nrun.log
+    # docker run -v $DATADIR:/imn --runtime=nvidia -t -i mlperf-lambda:resnet ./run_and_time.sh $LAMBDANGPU
+    docker run "${DOCKERENV[@]}" -v $DATADIR:/imn --runtime=nvidia -t -i mlperf-lambda:resnet ./run_and_time.sh
+    set +x
+ 
+  ) |& tee ${LOGFILE_BASE}_$nrun.log
+
+  export SEED=$(od -A n -t d -N 3 /dev/urandom)
+done
