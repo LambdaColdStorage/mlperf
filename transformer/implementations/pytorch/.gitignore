@@ -1,0 +1,6 @@
+fairseq/data/*.so
+build/*
+fairseq.egg-info/*
+*.pyc
+venv-compile/*
+__pycache__/*
