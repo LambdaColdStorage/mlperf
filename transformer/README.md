@@ -8,6 +8,7 @@ virtualenv -p /usr/bin/python3.6 venv-compile
 . venv-compile/bin/activate
 pip install torch==1.0.0 torchvision==0.2.2
 python setup.py install
+pip install mlperf_compliance==0.0.6
 
 ./run_preprocessing.sh
 
