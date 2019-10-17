@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Install Python3.6
-sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt-get update
-sudo apt-get install python3.6
-sudo apt-get install python3.6-dev
-
-
-
 # Install docker
 sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -

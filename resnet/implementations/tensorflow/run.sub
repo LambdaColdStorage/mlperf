@@ -8,7 +8,7 @@ BENCHMARK_NAME="RESNET"
 CONT=${CONT:-"mlperf-lambda:$BENCHMARK"}
 DATADIR=${DATADIR:-"/home/ubuntu/data/mlperf/$BENCHMARK"}
 LOGDIR=${LOGDIR:-"/home/ubuntu/benchmarks/mlperf/$BENCHMARK"}
-NEXP=${NEXP:-10} # Default number of times to run the benchmark
+NEXP=${NEXP:-1} # Default number of times to run the benchmark
 SEED=${SEED:-$(od -A n -t d -N 3 /dev/urandom)} # Allows passing SEED in, which is helpful if NEXP=1 ; for NEXP>1 we need to pick different seeds for subsequent runs
 
 export SEED
