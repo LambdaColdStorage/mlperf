@@ -20,8 +20,9 @@ CONSOLE_LOG="/tmp/resnet_run_${seed}.log"
 echo "running benchmark with seed $seed"
 # Quality of 0.2 is roughly a few hours of work
 # 0.749 is the final target quality
+target_acc=0.0001
 
-./run.sh $LAMBDANGPU $TRAIN_BATCH_SIZE $seed 0.749 |& tee ${CONSOLE_LOG}
+./run.sh $LAMBDANGPU $TRAIN_BATCH_SIZE $seed $target_acc |& tee ${CONSOLE_LOG}
 sleep 3 
 ret_code=$?; if [[ $ret_code != 0 ]]; then exit $ret_code; fi
 

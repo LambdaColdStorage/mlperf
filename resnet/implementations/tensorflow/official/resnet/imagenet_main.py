@@ -34,12 +34,20 @@ _DEFAULT_IMAGE_SIZE = 224
 _NUM_CHANNELS = 3
 _NUM_CLASSES = 1001
 
+# _NUM_IMAGES = {
+#     'train': 1281167,
+#     'validation': 50000,
+# }
+# _NUM_TRAIN_FILES = 1024
+# _NUM_VAL_FILES = 128
+
 _NUM_IMAGES = {
-    'train': 1281167,
+    'train': 50000,
     'validation': 50000,
 }
+_NUM_TRAIN_FILES = 128
+_NUM_VAL_FILES = 128
 
-_NUM_TRAIN_FILES = 1024
 _SHUFFLE_BUFFER = 1500
 
 
@@ -57,7 +65,7 @@ def get_filenames(is_training, data_dir):
   else:
     return [
         os.path.join(data_dir, 'validation-%05d-of-00128' % i)
-        for i in range(128)]
+        for i in range(_NUM_VAL_FILES)]
 
 
 def _parse_example_proto(example_serialized):

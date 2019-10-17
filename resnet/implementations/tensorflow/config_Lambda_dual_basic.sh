@@ -5,7 +5,7 @@ LAMBDANNODES=1
 LAMBDASYSTEM=$(basename $(readlink -f ${BASH_SOURCE[0]}) | sed 's/^config_//' | sed 's/\.sh$//' )
 
 # DL params
-TRAIN_BATCH_SIZE=${TRAIN_BATCH_SIZE:-64}
+TRAIN_BATCH_SIZE=${TRAIN_BATCH_SIZE:-128}
 
 # System config params
 LAMBDANGPU=2

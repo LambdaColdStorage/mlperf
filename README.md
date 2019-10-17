@@ -11,6 +11,11 @@ __Software Stack__
 - Additional softwares
 ```
 ./install.sh
+
+USER=ubuntu
+sudo groupadd docker
+sudo usermod -a -G docker $USER
+sudo reboot
 ```
 
 
