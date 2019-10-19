@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Freeze a model to a GraphDef proto."""
-
 from absl import app, flags
 from mpi4py import MPI
 import os
@@ -31,11 +30,11 @@ def main(unused_argv):
     """Freeze a model to a GraphDef proto."""
     # Use last GPU for freeze
     os.environ["CUDA_VISIBLE_DEVICES"] = "7"
-    if FLAGS.use_tpu:
+    if FLAGS.use_tpu:      
         dual_net.freeze_graph_tpu(FLAGS.model_path)
-    elif FLAGS.trt_batch > 0:
+    elif FLAGS.trt_batch > 0:   
         dual_net.freeze_graph(FLAGS.model_path, True, FLAGS.trt_batch)
-    else:
+    else:      
         dual_net.freeze_graph(FLAGS.model_path)
 
     icomm = MPI.Comm.Get_parent()

@@ -533,7 +533,7 @@ async def convert(state):
   """
   # set to use only second from last GPU
   new_env = os.environ.copy()
-  new_env['CUDA_VISIBLE_DEVICES'] = str(FLAGS.num_gpus_train - 2)
+  new_env['CUDA_VISIBLE_DEVICES'] = str(max(FLAGS.num_gpus_train - 2, 0))
 
   model_path = os.path.join(fsdb.models_dir(), state.train_model_name)
   if FLAGS.use_multinode:

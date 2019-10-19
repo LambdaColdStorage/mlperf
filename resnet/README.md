@@ -19,8 +19,8 @@ docker build --pull -t mlperf-lambda:resnet .
 ### Run Benchmark
 
 ```
-DATADIR=/mnt/imagenet CONT=mlperf-lambda:resnet PULL=0 LAMBDASYSTEM=Lambda_single_basic ./run.sub
-DATADIR=/mnt/imagenet CONT=mlperf-lambda:resnet PULL=0 LAMBDASYSTEM=Lambda_dual_basic ./run.sub
+NEXP=1 DATADIR=/mnt/imagenet CONT=mlperf-lambda:resnet PULL=0 LAMBDASYSTEM=Lambda_single_basic ./run.sub
+NEXP=1 DATADIR=/mnt/imagenet CONT=mlperf-lambda:resnet PULL=0 LAMBDASYSTEM=Lambda_dual_basic ./run.sub
 
 # Interactive mode
 DATADIR=/mnt/imagenet; docker run -v $DATADIR:/imn --runtime=nvidia -t -i mlperf-lambda:resnet
@@ -28,6 +28,7 @@ DATADIR=/mnt/imagenet; docker run -v $DATADIR:/imn --runtime=nvidia -t -i mlperf
 
 
 ### Note
+- __NEXP__ number of trails for running the benchmark. Set to 1 to save time.
 - __TRAIN_BATCH_SIZE__ in the config file will be splitted by number of GPUs (See `per_device_batch_size` in `resnet_run_loop.py`)
 - __--train_epochs__ in `run.sh` is set to `1` to save time.
 - __--epochs_between_evals__ in `run.sh` is set to `1` so it works with `train_epochs=1`
