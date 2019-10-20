@@ -1,11 +1,10 @@
-fairseq/data/*.so
 dist/*
 build/*
-fairseq.egg-info/*
-*.pyc
 venv-compile/*
 __pycache__/*
+fairseq/data/*.so
+fairseq.egg-info/*
 fairseq/data/__pycache__/*
-dist/*
 fairseq/__pycache__/*
 utils/__pycache__/*
+*.pyc
