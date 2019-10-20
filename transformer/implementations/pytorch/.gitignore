@@ -6,3 +6,6 @@ fairseq.egg-info/*
 venv-compile/*
 __pycache__/*
 fairseq/data/__pycache__/*
+dist/*
+fairseq/__pycache__/*
+utils/__pycache__/*
