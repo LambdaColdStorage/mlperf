@@ -7,7 +7,7 @@ Step Zero: Create Python Virtual Env
 
 ```
 cd ~
-virtualenv -p /bin/usr/python3.6 venv-mxnet
+virtualenv -p /usr/bin/python3.6 venv-mxnet
 . venv-mxnet/bin/activate
 pip install opencv-python mxnet
 ```
@@ -69,4 +69,9 @@ docker build --pull -t mlperf-nvidia:image_classification .
 
 ```
 DATADIR=/home/ubuntu LOGDIR=/home/ubuntu DGXSYSTEM=DGX1 ./run.sub
+DATADIR=/home/ubuntu LOGDIR=/home/ubuntu DGXSYSTEM=Lambda_dual_basic ./run.sub
 ```
+
+### Notes
+
+Use `resnet-v1b-normconv-fl` for server. However this does not work with workstations (`<stderr>:This NormalizedConvolution is not supported by cudnn, MXNET NormalizedConvolution is applied.`) Use `resnet-v1b-fl` for workstation instead. 

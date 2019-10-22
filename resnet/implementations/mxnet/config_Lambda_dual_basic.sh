@@ -2,7 +2,7 @@
 
 ## DL params
 OPTIMIZER="sgdwfastlars"
-BATCHSIZE="128"
+BATCHSIZE="96"
 KVSTORE="horovod"
 LR="5"
 WARMUP_EPOCHS="5"
@@ -14,7 +14,7 @@ LABELSMOOTHING="0.1"
 LRSCHED="pow2"
 NUMEPOCHS="72"
 
-NETWORK="resnet-v1b-normconv-fl"
+NETWORK="resnet-v1b-fl"
 export MXNET_CUDNN_SUPPLY_NORMCONV_CONSTANTS=1
 
 DALI_PREFETCH_QUEUE="6"
