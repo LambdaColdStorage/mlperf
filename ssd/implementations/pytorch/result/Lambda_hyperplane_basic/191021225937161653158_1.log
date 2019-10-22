@@ -1,0 +1,640 @@
+Beginning trial 1 of 5
+Gathering sys log on lambda-server
+:::MLL 1571724014.377 submission_benchmark: {"value": "ssd", "metadata": {"file": "mlperf_log_utils.py", "lineno": 178}}
+:::MLL 1571724014.378 submission_org: {"value": "NVIDIA", "metadata": {"file": "mlperf_log_utils.py", "lineno": 183}}
+WARNING: Log validation: Key "submission_division" is not in known ssd keys.
+:::MLL 1571724014.379 submission_division: {"value": "closed", "metadata": {"file": "mlperf_log_utils.py", "lineno": 187}}
+:::MLL 1571724014.380 submission_status: {"value": "onprem", "metadata": {"file": "mlperf_log_utils.py", "lineno": 191}}
+:::MLL 1571724014.381 submission_platform: {"value": "1xG481-S80-00", "metadata": {"file": "mlperf_log_utils.py", "lineno": 195}}
+:::MLL 1571724014.382 submission_entry: {"value": "{'hardware': 'G481-S80-00', 'framework': 'PyTorch NVIDIA Release 19.05', 'power': 'N/A', 'notes': 'N/A', 'interconnect': ' ', 'os': 'Ubuntu 18.04.3 LTS / ', 'libraries': \"{'container_base': 'Ubuntu-16.04', 'openmpi_version': '3.1.3', 'mofed_version': '0', 'cuda_version': '10.1.163', 'cuda_driver_version': '418.67', 'nccl_version': '2.4.6', 'cudnn_version': '7.6.0.64', 'cublas_version': '10.2.0.163', 'trt_version': '5.1.5.0', 'dali_version': '0.9.1'}\", 'compilers': 'gcc (Ubuntu 5.4.0-6ubuntu1~16.04.11) 5.4.0 20160609', 'nodes': \"{'num_nodes': '1', 'cpu': '2x Intel(R) Xeon(R) Gold 6148 CPU @ 2.40GHz', 'num_cores': '40', 'num_vcpus': '80', 'accelerator': 'Tesla V100-SXM2-32GB', 'num_accelerators': '8', 'sys_mem_size': '502 GB', 'sys_storage_type': 'NVMe SSD', 'sys_storage_size': '1x 1.8T', 'cpu_accel_interconnect': 'UPI', 'network_card': '', 'num_network_cards': '0', 'notes': ''}\"}", "metadata": {"file": "mlperf_log_utils.py", "lineno": 199}}
+:::MLL 1571724014.383 submission_poc_name: {"value": "Paulius Micikevicius", "metadata": {"file": "mlperf_log_utils.py", "lineno": 203}}
+:::MLL 1571724014.384 submission_poc_email: {"value": "pauliusm@nvidia.com", "metadata": {"file": "mlperf_log_utils.py", "lineno": 207}}
+Clearing caches
+:::MLL 1571724017.661 cache_clear: {"value": true, "metadata": {"file": "<string>", "lineno": 1}}
+Launching on node lambda-server
++ pids+=($!)
++ set +x
+++ eval echo
++++ echo
++ docker exec -e DGXSYSTEM=DGX1 -e 'MULTI_NODE= --master_port=5090' -e SLURM_JOB_ID=191021225937161653158 -e SLURM_NTASKS_PER_NODE= cont_191021225937161653158 ./run_and_time.sh
+Run vars: id 191021225937161653158 gpus 8 mparams  --master_port=5090
+STARTING TIMING RUN AT 2019-10-22 06:00:18 AM
+running benchmark
++ NUMEPOCHS=80
++ echo 'running benchmark'
++ export DATASET_DIR=/data/coco2017
++ DATASET_DIR=/data/coco2017
++ export TORCH_MODEL_ZOO=/data/torchvision
++ TORCH_MODEL_ZOO=/data/torchvision
++ python -m bind_launch --nsockets_per_node 2 --ncores_per_socket 10 --nproc_per_node 8 --master_port=5090 train.py --use-fp16 --nhwc --pad-input --jit --delay-allreduce --opt-loss --epochs 80 --warmup-factor 0 --no-save --threshold=0.23 --data /data/coco2017 --evaluation 120000 160000 180000 200000 220000 240000 260000 280000 --batch-size 120 --eval-batch-size 160 --warmup 650 --lr 2.92e-3 --wd 1.6e-4 --use-nvjpeg --use-roi-decode
+:::MLL 1571724024.211 init_start: {"value": null, "metadata": {"file": "train.py", "lineno": 833}}
+:::MLL 1571724024.212 init_start: {"value": null, "metadata": {"file": "train.py", "lineno": 833}}
+:::MLL 1571724024.212 init_start: {"value": null, "metadata": {"file": "train.py", "lineno": 833}}
+:::MLL 1571724024.212 init_start: {"value": null, "metadata": {"file": "train.py", "lineno": 833}}
+:::MLL 1571724024.212 init_start: {"value": null, "metadata": {"file": "train.py", "lineno": 833}}
+:::MLL 1571724024.212 init_start: {"value": null, "metadata": {"file": "train.py", "lineno": 833}}
+BN group: 1
+:::MLL 1571724024.213 init_start: {"value": null, "metadata": {"file": "train.py", "lineno": 833}}
+BN group: 1
+BN group: 1
+BN group: 1
+BN group: 1
+BN group: 1
+BN group: 1
+:::MLL 1571724024.225 init_start: {"value": null, "metadata": {"file": "train.py", "lineno": 833}}
+BN group: 1
+1 Using seed = 1150523916
+3 Using seed = 1150523918
+7 Using seed = 1150523922
+6 Using seed = 1150523921
+5 Using seed = 1150523920
+4 Using seed = 1150523919
+2 Using seed = 1150523917
+0 Using seed = 1150523915
+:::MLL 1571724036.737 max_samples: {"value": 1, "metadata": {"file": "utils.py", "lineno": 465}}
+/opt/conda/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='none' instead.
+  warnings.warn(warning.format(ret))
+/opt/conda/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='none' instead.
+  warnings.warn(warning.format(ret))
+/opt/conda/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='none' instead.
+  warnings.warn(warning.format(ret))
+/opt/conda/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='none' instead.
+  warnings.warn(warning.format(ret))
+Delaying allreduces to the end of backward()
+:::MLL 1571724037.387 model_bn_span: {"value": 120, "metadata": {"file": "train.py", "lineno": 480}}
+:::MLL 1571724037.388 global_batch_size: {"value": 960, "metadata": {"file": "train.py", "lineno": 481}}
+:::MLL 1571724037.400 opt_base_learning_rate: {"value": 0.08750000000000001, "metadata": {"file": "train.py", "lineno": 511}}
+:::MLL 1571724037.400 opt_weight_decay: {"value": 0.00016, "metadata": {"file": "train.py", "lineno": 513}}
+:::MLL 1571724037.400 opt_learning_rate_warmup_steps: {"value": 650, "metadata": {"file": "train.py", "lineno": 516}}
+:::MLL 1571724037.401 opt_learning_rate_warmup_factor: {"value": 0, "metadata": {"file": "train.py", "lineno": 518}}
+/opt/conda/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='none' instead.
+  warnings.warn(warning.format(ret))
+/opt/conda/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='none' instead.
+  warnings.warn(warning.format(ret))
+/opt/conda/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='none' instead.
+  warnings.warn(warning.format(ret))
+/opt/conda/lib/python3.6/site-packages/torch/nn/_reduction.py:46: UserWarning: size_average and reduce args will be deprecated, please use reduction='none' instead.
+  warnings.warn(warning.format(ret))
+epoch nbatch loss
+:::MLL 1571724046.641 init_stop: {"value": null, "metadata": {"file": "train.py", "lineno": 604}}
+:::MLL 1571724046.642 run_start: {"value": null, "metadata": {"file": "train.py", "lineno": 610}}
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+Done (t=0.43s)
+creating index...
+Done (t=0.45s)
+creating index...
+Done (t=0.45s)
+creating index...
+Done (t=0.45s)
+creating index...
+Done (t=0.51s)
+creating index...
+Done (t=0.53s)
+creating index...
+Done (t=0.53s)
+creating index...
+Done (t=0.54s)
+creating index...
+time_check a: 1571724048.366238356
+time_check b: 1571724052.509748697
+:::MLL 1571724053.729 block_start: {"value": null, "metadata": {"first_epoch_num": 1, "epoch_count": 32.74606450292497, "file": "train.py", "lineno": 669}}
+:::MLL 1571724053.730 epoch_start: {"value": null, "metadata": {"epoch_num": 1, "file": "train.py", "lineno": 673}}
+Iteration:      0, Loss function: 22.668, Average Loss: 0.023, avg. samples / sec: 55.19
+Iteration:     20, Loss function: 20.534, Average Loss: 0.443, avg. samples / sec: 2904.84
+Iteration:     40, Loss function: 17.449, Average Loss: 0.827, avg. samples / sec: 3640.00
+Iteration:     60, Loss function: 13.062, Average Loss: 1.091, avg. samples / sec: 3732.81
+Iteration:     80, Loss function: 10.175, Average Loss: 1.286, avg. samples / sec: 3901.66
+Iteration:    100, Loss function: 9.550, Average Loss: 1.452, avg. samples / sec: 3913.14
+Iteration:    120, Loss function: 9.098, Average Loss: 1.603, avg. samples / sec: 3951.19
+:::MLL 1571724087.644 epoch_stop: {"value": null, "metadata": {"epoch_num": 1, "file": "train.py", "lineno": 819}}
+:::MLL 1571724087.645 epoch_start: {"value": null, "metadata": {"epoch_num": 2, "file": "train.py", "lineno": 673}}
+Iteration:    140, Loss function: 8.849, Average Loss: 1.747, avg. samples / sec: 3983.62
+Iteration:    160, Loss function: 8.544, Average Loss: 1.884, avg. samples / sec: 4021.26
+Iteration:    180, Loss function: 8.312, Average Loss: 2.013, avg. samples / sec: 4041.85
+Iteration:    200, Loss function: 8.457, Average Loss: 2.136, avg. samples / sec: 4000.16
+Iteration:    220, Loss function: 7.623, Average Loss: 2.257, avg. samples / sec: 4004.57
+Iteration:    240, Loss function: 8.458, Average Loss: 2.370, avg. samples / sec: 4056.20
+:::MLL 1571724116.775 epoch_stop: {"value": null, "metadata": {"epoch_num": 2, "file": "train.py", "lineno": 819}}
+:::MLL 1571724116.775 epoch_start: {"value": null, "metadata": {"epoch_num": 3, "file": "train.py", "lineno": 673}}
+Iteration:    260, Loss function: 7.727, Average Loss: 2.482, avg. samples / sec: 4073.15
+Iteration:    280, Loss function: 7.104, Average Loss: 2.582, avg. samples / sec: 4081.26
+Iteration:    300, Loss function: 7.908, Average Loss: 2.679, avg. samples / sec: 4096.58
+Iteration:    320, Loss function: 7.170, Average Loss: 2.775, avg. samples / sec: 4062.83
+Iteration:    340, Loss function: 7.424, Average Loss: 2.862, avg. samples / sec: 3994.92
+Iteration:    360, Loss function: 7.182, Average Loss: 2.951, avg. samples / sec: 4105.50
+:::MLL 1571724145.576 epoch_stop: {"value": null, "metadata": {"epoch_num": 3, "file": "train.py", "lineno": 819}}
+:::MLL 1571724145.576 epoch_start: {"value": null, "metadata": {"epoch_num": 4, "file": "train.py", "lineno": 673}}
+Iteration:    380, Loss function: 6.856, Average Loss: 3.032, avg. samples / sec: 3989.46
+Iteration:    400, Loss function: 6.912, Average Loss: 3.107, avg. samples / sec: 4090.64
+Iteration:    420, Loss function: 6.584, Average Loss: 3.179, avg. samples / sec: 4006.45
+Iteration:    440, Loss function: 6.612, Average Loss: 3.249, avg. samples / sec: 3941.17
+Iteration:    460, Loss function: 6.407, Average Loss: 3.316, avg. samples / sec: 4021.91
+Iteration:    480, Loss function: 6.939, Average Loss: 3.380, avg. samples / sec: 4071.76
+:::MLL 1571724174.644 epoch_stop: {"value": null, "metadata": {"epoch_num": 4, "file": "train.py", "lineno": 819}}
+:::MLL 1571724174.644 epoch_start: {"value": null, "metadata": {"epoch_num": 5, "file": "train.py", "lineno": 673}}
+Iteration:    500, Loss function: 6.133, Average Loss: 3.442, avg. samples / sec: 4061.42
+Iteration:    520, Loss function: 6.290, Average Loss: 3.500, avg. samples / sec: 4059.26
+Iteration:    540, Loss function: 5.917, Average Loss: 3.552, avg. samples / sec: 4086.15
+Iteration:    560, Loss function: 5.950, Average Loss: 3.604, avg. samples / sec: 4087.99
+Iteration:    580, Loss function: 6.688, Average Loss: 3.665, avg. samples / sec: 4078.19
+Iteration:    600, Loss function: 5.857, Average Loss: 3.718, avg. samples / sec: 4003.52
+:::MLL 1571724203.511 epoch_stop: {"value": null, "metadata": {"epoch_num": 5, "file": "train.py", "lineno": 819}}
+:::MLL 1571724203.512 epoch_start: {"value": null, "metadata": {"epoch_num": 6, "file": "train.py", "lineno": 673}}
+Iteration:    620, Loss function: 5.648, Average Loss: 3.762, avg. samples / sec: 4016.15
+Iteration:    640, Loss function: 5.807, Average Loss: 3.805, avg. samples / sec: 4074.81
+Iteration:    660, Loss function: 5.622, Average Loss: 3.845, avg. samples / sec: 4126.79
+Iteration:    680, Loss function: 5.743, Average Loss: 3.883, avg. samples / sec: 4114.76
+Iteration:    700, Loss function: 5.463, Average Loss: 3.920, avg. samples / sec: 4079.24
+Iteration:    720, Loss function: 5.597, Average Loss: 3.952, avg. samples / sec: 4030.98
+:::MLL 1571724232.282 epoch_stop: {"value": null, "metadata": {"epoch_num": 6, "file": "train.py", "lineno": 819}}
+:::MLL 1571724232.283 epoch_start: {"value": null, "metadata": {"epoch_num": 7, "file": "train.py", "lineno": 673}}
+Iteration:    740, Loss function: 5.737, Average Loss: 3.985, avg. samples / sec: 4041.04
+Iteration:    760, Loss function: 5.512, Average Loss: 4.016, avg. samples / sec: 4042.14
+Iteration:    780, Loss function: 5.640, Average Loss: 4.044, avg. samples / sec: 4068.64
+Iteration:    800, Loss function: 5.457, Average Loss: 4.069, avg. samples / sec: 4050.72
+Iteration:    820, Loss function: 5.211, Average Loss: 4.095, avg. samples / sec: 4079.91
+Iteration:    840, Loss function: 5.466, Average Loss: 4.119, avg. samples / sec: 4067.24
+:::MLL 1571724261.347 epoch_stop: {"value": null, "metadata": {"epoch_num": 7, "file": "train.py", "lineno": 819}}
+:::MLL 1571724261.347 epoch_start: {"value": null, "metadata": {"epoch_num": 8, "file": "train.py", "lineno": 673}}
+Iteration:    860, Loss function: 5.255, Average Loss: 4.142, avg. samples / sec: 4060.87
+Iteration:    880, Loss function: 5.274, Average Loss: 4.164, avg. samples / sec: 4050.22
+Iteration:    900, Loss function: 5.641, Average Loss: 4.185, avg. samples / sec: 4060.16
+Iteration:    920, Loss function: 5.233, Average Loss: 4.205, avg. samples / sec: 4117.29
+Iteration:    940, Loss function: 5.236, Average Loss: 4.224, avg. samples / sec: 4092.01
+Iteration:    960, Loss function: 4.969, Average Loss: 4.242, avg. samples / sec: 4100.51
+:::MLL 1571724290.045 epoch_stop: {"value": null, "metadata": {"epoch_num": 8, "file": "train.py", "lineno": 819}}
+:::MLL 1571724290.046 epoch_start: {"value": null, "metadata": {"epoch_num": 9, "file": "train.py", "lineno": 673}}
+Iteration:    980, Loss function: 4.899, Average Loss: 4.258, avg. samples / sec: 4078.62
+Iteration:   1000, Loss function: 5.281, Average Loss: 4.273, avg. samples / sec: 4065.15
+Iteration:   1020, Loss function: 5.004, Average Loss: 4.287, avg. samples / sec: 4116.09
+Iteration:   1040, Loss function: 5.023, Average Loss: 4.301, avg. samples / sec: 4099.45
+Iteration:   1060, Loss function: 4.685, Average Loss: 4.313, avg. samples / sec: 4051.19
+Iteration:   1080, Loss function: 4.837, Average Loss: 4.326, avg. samples / sec: 4045.01
+:::MLL 1571724318.822 epoch_stop: {"value": null, "metadata": {"epoch_num": 9, "file": "train.py", "lineno": 819}}
+:::MLL 1571724318.822 epoch_start: {"value": null, "metadata": {"epoch_num": 10, "file": "train.py", "lineno": 673}}
+Iteration:   1100, Loss function: 4.878, Average Loss: 4.340, avg. samples / sec: 4049.46
+Iteration:   1120, Loss function: 4.993, Average Loss: 4.351, avg. samples / sec: 4042.42
+Iteration:   1140, Loss function: 4.927, Average Loss: 4.359, avg. samples / sec: 4072.82
+Iteration:   1160, Loss function: 5.068, Average Loss: 4.369, avg. samples / sec: 4106.89
+Iteration:   1180, Loss function: 4.998, Average Loss: 4.379, avg. samples / sec: 4031.49
+Iteration:   1200, Loss function: 4.866, Average Loss: 4.386, avg. samples / sec: 4086.02
+Iteration:   1220, Loss function: 4.816, Average Loss: 4.394, avg. samples / sec: 4101.33
+:::MLL 1571724347.598 epoch_stop: {"value": null, "metadata": {"epoch_num": 10, "file": "train.py", "lineno": 819}}
+:::MLL 1571724347.598 epoch_start: {"value": null, "metadata": {"epoch_num": 11, "file": "train.py", "lineno": 673}}
+Iteration:   1240, Loss function: 4.683, Average Loss: 4.401, avg. samples / sec: 4061.52
+Iteration:   1260, Loss function: 4.788, Average Loss: 4.408, avg. samples / sec: 4056.42
+Iteration:   1280, Loss function: 4.799, Average Loss: 4.414, avg. samples / sec: 3990.55
+Iteration:   1300, Loss function: 4.720, Average Loss: 4.420, avg. samples / sec: 4078.68
+Iteration:   1320, Loss function: 4.709, Average Loss: 4.427, avg. samples / sec: 4041.24
+Iteration:   1340, Loss function: 4.766, Average Loss: 4.432, avg. samples / sec: 4065.95
+:::MLL 1571724376.522 epoch_stop: {"value": null, "metadata": {"epoch_num": 11, "file": "train.py", "lineno": 819}}
+:::MLL 1571724376.523 epoch_start: {"value": null, "metadata": {"epoch_num": 12, "file": "train.py", "lineno": 673}}
+Iteration:   1360, Loss function: 4.847, Average Loss: 4.435, avg. samples / sec: 4020.80
+Iteration:   1380, Loss function: 4.444, Average Loss: 4.438, avg. samples / sec: 4055.03
+Iteration:   1400, Loss function: 4.350, Average Loss: 4.441, avg. samples / sec: 4033.58
+Iteration:   1420, Loss function: 4.800, Average Loss: 4.446, avg. samples / sec: 4090.67
+Iteration:   1440, Loss function: 4.831, Average Loss: 4.451, avg. samples / sec: 4047.13
+Iteration:   1460, Loss function: 4.684, Average Loss: 4.455, avg. samples / sec: 4062.66
+:::MLL 1571724405.448 epoch_stop: {"value": null, "metadata": {"epoch_num": 12, "file": "train.py", "lineno": 819}}
+:::MLL 1571724405.449 epoch_start: {"value": null, "metadata": {"epoch_num": 13, "file": "train.py", "lineno": 673}}
+Iteration:   1480, Loss function: 4.510, Average Loss: 4.457, avg. samples / sec: 4001.63
+Iteration:   1500, Loss function: 4.462, Average Loss: 4.458, avg. samples / sec: 4081.05
+Iteration:   1520, Loss function: 4.524, Average Loss: 4.458, avg. samples / sec: 4080.01
+Iteration:   1540, Loss function: 4.423, Average Loss: 4.459, avg. samples / sec: 4108.22
+Iteration:   1560, Loss function: 4.449, Average Loss: 4.459, avg. samples / sec: 4054.18
+Iteration:   1580, Loss function: 4.555, Average Loss: 4.461, avg. samples / sec: 4028.92
+:::MLL 1571724434.302 epoch_stop: {"value": null, "metadata": {"epoch_num": 13, "file": "train.py", "lineno": 819}}
+:::MLL 1571724434.302 epoch_start: {"value": null, "metadata": {"epoch_num": 14, "file": "train.py", "lineno": 673}}
+Iteration:   1600, Loss function: 4.549, Average Loss: 4.460, avg. samples / sec: 4022.16
+Iteration:   1620, Loss function: 4.355, Average Loss: 4.462, avg. samples / sec: 4044.86
+Iteration:   1640, Loss function: 4.718, Average Loss: 4.462, avg. samples / sec: 4056.55
+Iteration:   1660, Loss function: 4.211, Average Loss: 4.463, avg. samples / sec: 4073.85
+Iteration:   1680, Loss function: 4.393, Average Loss: 4.463, avg. samples / sec: 4072.74
+Iteration:   1700, Loss function: 4.222, Average Loss: 4.463, avg. samples / sec: 4091.92
+:::MLL 1571724463.342 epoch_stop: {"value": null, "metadata": {"epoch_num": 14, "file": "train.py", "lineno": 819}}
+:::MLL 1571724463.342 epoch_start: {"value": null, "metadata": {"epoch_num": 15, "file": "train.py", "lineno": 673}}
+Iteration:   1720, Loss function: 4.380, Average Loss: 4.462, avg. samples / sec: 4064.71
+Iteration:   1740, Loss function: 4.406, Average Loss: 4.460, avg. samples / sec: 4050.90
+Iteration:   1760, Loss function: 4.459, Average Loss: 4.459, avg. samples / sec: 4107.71
+Iteration:   1780, Loss function: 4.416, Average Loss: 4.460, avg. samples / sec: 4098.80
+Iteration:   1800, Loss function: 4.228, Average Loss: 4.458, avg. samples / sec: 4080.08
+Iteration:   1820, Loss function: 4.499, Average Loss: 4.458, avg. samples / sec: 4084.25
+:::MLL 1571724492.043 epoch_stop: {"value": null, "metadata": {"epoch_num": 15, "file": "train.py", "lineno": 819}}
+:::MLL 1571724492.044 epoch_start: {"value": null, "metadata": {"epoch_num": 16, "file": "train.py", "lineno": 673}}
+Iteration:   1840, Loss function: 4.491, Average Loss: 4.457, avg. samples / sec: 4052.42
+Iteration:   1860, Loss function: 4.336, Average Loss: 4.454, avg. samples / sec: 4061.58
+Iteration:   1880, Loss function: 4.512, Average Loss: 4.453, avg. samples / sec: 4101.09
+Iteration:   1900, Loss function: 4.487, Average Loss: 4.451, avg. samples / sec: 4047.41
+Iteration:   1920, Loss function: 4.426, Average Loss: 4.449, avg. samples / sec: 4037.14
+Iteration:   1940, Loss function: 4.550, Average Loss: 4.446, avg. samples / sec: 4054.14
+:::MLL 1571724520.876 epoch_stop: {"value": null, "metadata": {"epoch_num": 16, "file": "train.py", "lineno": 819}}
+:::MLL 1571724520.877 epoch_start: {"value": null, "metadata": {"epoch_num": 17, "file": "train.py", "lineno": 673}}
+Iteration:   1960, Loss function: 4.133, Average Loss: 4.444, avg. samples / sec: 4086.51
+Iteration:   1980, Loss function: 4.126, Average Loss: 4.441, avg. samples / sec: 4046.86
+Iteration:   2000, Loss function: 4.397, Average Loss: 4.436, avg. samples / sec: 4061.94
+Iteration:   2020, Loss function: 4.400, Average Loss: 4.435, avg. samples / sec: 4035.08
+Iteration:   2040, Loss function: 4.228, Average Loss: 4.432, avg. samples / sec: 4020.56
+Iteration:   2060, Loss function: 4.423, Average Loss: 4.430, avg. samples / sec: 4068.42
+:::MLL 1571724549.834 epoch_stop: {"value": null, "metadata": {"epoch_num": 17, "file": "train.py", "lineno": 819}}
+:::MLL 1571724549.834 epoch_start: {"value": null, "metadata": {"epoch_num": 18, "file": "train.py", "lineno": 673}}
+Iteration:   2080, Loss function: 4.206, Average Loss: 4.426, avg. samples / sec: 4023.15
+Iteration:   2100, Loss function: 4.469, Average Loss: 4.424, avg. samples / sec: 4083.60
+Iteration:   2120, Loss function: 4.507, Average Loss: 4.421, avg. samples / sec: 4093.86
+Iteration:   2140, Loss function: 4.237, Average Loss: 4.419, avg. samples / sec: 4083.65
+Iteration:   2160, Loss function: 4.385, Average Loss: 4.416, avg. samples / sec: 4045.37
+Iteration:   2180, Loss function: 4.086, Average Loss: 4.413, avg. samples / sec: 4112.89
+:::MLL 1571724578.591 epoch_stop: {"value": null, "metadata": {"epoch_num": 18, "file": "train.py", "lineno": 819}}
+:::MLL 1571724578.592 epoch_start: {"value": null, "metadata": {"epoch_num": 19, "file": "train.py", "lineno": 673}}
+Iteration:   2200, Loss function: 4.377, Average Loss: 4.411, avg. samples / sec: 4023.24
+Iteration:   2220, Loss function: 4.031, Average Loss: 4.407, avg. samples / sec: 4089.86
+Iteration:   2240, Loss function: 4.134, Average Loss: 4.402, avg. samples / sec: 4104.82
+Iteration:   2260, Loss function: 4.517, Average Loss: 4.399, avg. samples / sec: 4076.05
+Iteration:   2280, Loss function: 4.043, Average Loss: 4.395, avg. samples / sec: 4098.28
+Iteration:   2300, Loss function: 4.169, Average Loss: 4.392, avg. samples / sec: 4104.83
+Iteration:   2320, Loss function: 4.368, Average Loss: 4.388, avg. samples / sec: 4095.25
+:::MLL 1571724607.233 epoch_stop: {"value": null, "metadata": {"epoch_num": 19, "file": "train.py", "lineno": 819}}
+:::MLL 1571724607.234 epoch_start: {"value": null, "metadata": {"epoch_num": 20, "file": "train.py", "lineno": 673}}
+Iteration:   2340, Loss function: 3.929, Average Loss: 4.384, avg. samples / sec: 4052.10
+Iteration:   2360, Loss function: 4.157, Average Loss: 4.380, avg. samples / sec: 4060.95
+Iteration:   2380, Loss function: 4.171, Average Loss: 4.374, avg. samples / sec: 4076.13
+Iteration:   2400, Loss function: 4.397, Average Loss: 4.371, avg. samples / sec: 4060.03
+Iteration:   2420, Loss function: 4.176, Average Loss: 4.367, avg. samples / sec: 4043.50
+Iteration:   2440, Loss function: 4.053, Average Loss: 4.363, avg. samples / sec: 4122.85
+:::MLL 1571724636.230 epoch_stop: {"value": null, "metadata": {"epoch_num": 20, "file": "train.py", "lineno": 819}}
+:::MLL 1571724636.231 epoch_start: {"value": null, "metadata": {"epoch_num": 21, "file": "train.py", "lineno": 673}}
+Iteration:   2460, Loss function: 4.261, Average Loss: 4.358, avg. samples / sec: 4050.55
+Iteration:   2480, Loss function: 4.099, Average Loss: 4.354, avg. samples / sec: 4045.90
+Iteration:   2500, Loss function: 4.594, Average Loss: 4.350, avg. samples / sec: 4091.62
+Iteration:   2520, Loss function: 3.992, Average Loss: 4.345, avg. samples / sec: 4101.95
+Iteration:   2540, Loss function: 4.146, Average Loss: 4.341, avg. samples / sec: 4115.95
+Iteration:   2560, Loss function: 3.946, Average Loss: 4.338, avg. samples / sec: 4068.26
+:::MLL 1571724664.928 epoch_stop: {"value": null, "metadata": {"epoch_num": 21, "file": "train.py", "lineno": 819}}
+:::MLL 1571724664.929 epoch_start: {"value": null, "metadata": {"epoch_num": 22, "file": "train.py", "lineno": 673}}
+Iteration:   2580, Loss function: 4.055, Average Loss: 4.332, avg. samples / sec: 4062.90
+Iteration:   2600, Loss function: 4.099, Average Loss: 4.327, avg. samples / sec: 4057.52
+Iteration:   2620, Loss function: 3.986, Average Loss: 4.322, avg. samples / sec: 4040.96
+Iteration:   2640, Loss function: 3.982, Average Loss: 4.318, avg. samples / sec: 4042.28
+Iteration:   2660, Loss function: 4.075, Average Loss: 4.314, avg. samples / sec: 4055.17
+Iteration:   2680, Loss function: 3.751, Average Loss: 4.310, avg. samples / sec: 4068.56
+:::MLL 1571724693.811 epoch_stop: {"value": null, "metadata": {"epoch_num": 22, "file": "train.py", "lineno": 819}}
+:::MLL 1571724693.811 epoch_start: {"value": null, "metadata": {"epoch_num": 23, "file": "train.py", "lineno": 673}}
+Iteration:   2700, Loss function: 4.168, Average Loss: 4.305, avg. samples / sec: 3998.14
+Iteration:   2720, Loss function: 3.856, Average Loss: 4.301, avg. samples / sec: 4084.21
+Iteration:   2740, Loss function: 3.917, Average Loss: 4.298, avg. samples / sec: 4061.04
+Iteration:   2760, Loss function: 4.494, Average Loss: 4.294, avg. samples / sec: 4064.06
+Iteration:   2780, Loss function: 4.244, Average Loss: 4.290, avg. samples / sec: 4016.59
+Iteration:   2800, Loss function: 3.998, Average Loss: 4.286, avg. samples / sec: 4047.36
+:::MLL 1571724722.827 epoch_stop: {"value": null, "metadata": {"epoch_num": 23, "file": "train.py", "lineno": 819}}
+:::MLL 1571724722.827 epoch_start: {"value": null, "metadata": {"epoch_num": 24, "file": "train.py", "lineno": 673}}
+Iteration:   2820, Loss function: 3.923, Average Loss: 4.281, avg. samples / sec: 3993.36
+Iteration:   2840, Loss function: 3.860, Average Loss: 4.275, avg. samples / sec: 4047.69
+Iteration:   2860, Loss function: 3.847, Average Loss: 4.271, avg. samples / sec: 4043.76
+Iteration:   2880, Loss function: 4.221, Average Loss: 4.267, avg. samples / sec: 4091.59
+Iteration:   2900, Loss function: 4.279, Average Loss: 4.265, avg. samples / sec: 4066.66
+Iteration:   2920, Loss function: 4.131, Average Loss: 4.262, avg. samples / sec: 4104.97
+:::MLL 1571724751.632 epoch_stop: {"value": null, "metadata": {"epoch_num": 24, "file": "train.py", "lineno": 819}}
+:::MLL 1571724751.633 epoch_start: {"value": null, "metadata": {"epoch_num": 25, "file": "train.py", "lineno": 673}}
+Iteration:   2940, Loss function: 3.921, Average Loss: 4.257, avg. samples / sec: 4038.44
+Iteration:   2960, Loss function: 4.240, Average Loss: 4.253, avg. samples / sec: 4073.03
+Iteration:   2980, Loss function: 3.829, Average Loss: 4.248, avg. samples / sec: 4083.37
+Iteration:   3000, Loss function: 4.371, Average Loss: 4.243, avg. samples / sec: 4038.71
+Iteration:   3020, Loss function: 4.358, Average Loss: 4.238, avg. samples / sec: 3976.64
+Iteration:   3040, Loss function: 4.018, Average Loss: 4.236, avg. samples / sec: 4121.30
+:::MLL 1571724780.536 epoch_stop: {"value": null, "metadata": {"epoch_num": 25, "file": "train.py", "lineno": 819}}
+:::MLL 1571724780.536 epoch_start: {"value": null, "metadata": {"epoch_num": 26, "file": "train.py", "lineno": 673}}
+Iteration:   3060, Loss function: 3.988, Average Loss: 4.232, avg. samples / sec: 4042.70
+Iteration:   3080, Loss function: 4.056, Average Loss: 4.227, avg. samples / sec: 4104.98
+Iteration:   3100, Loss function: 3.745, Average Loss: 4.221, avg. samples / sec: 4105.65
+Iteration:   3120, Loss function: 3.951, Average Loss: 4.218, avg. samples / sec: 4070.28
+Iteration:   3140, Loss function: 4.153, Average Loss: 4.213, avg. samples / sec: 4043.29
+Iteration:   3160, Loss function: 3.975, Average Loss: 4.210, avg. samples / sec: 3998.52
+:::MLL 1571724809.395 epoch_stop: {"value": null, "metadata": {"epoch_num": 26, "file": "train.py", "lineno": 819}}
+:::MLL 1571724809.395 epoch_start: {"value": null, "metadata": {"epoch_num": 27, "file": "train.py", "lineno": 673}}
+Iteration:   3180, Loss function: 4.225, Average Loss: 4.205, avg. samples / sec: 4010.79
+Iteration:   3200, Loss function: 4.211, Average Loss: 4.201, avg. samples / sec: 4032.50
+Iteration:   3220, Loss function: 4.128, Average Loss: 4.196, avg. samples / sec: 4077.60
+Iteration:   3240, Loss function: 4.124, Average Loss: 4.191, avg. samples / sec: 4081.57
+Iteration:   3260, Loss function: 3.664, Average Loss: 4.185, avg. samples / sec: 4119.01
+Iteration:   3280, Loss function: 3.732, Average Loss: 4.181, avg. samples / sec: 4078.52
+:::MLL 1571724838.416 epoch_stop: {"value": null, "metadata": {"epoch_num": 27, "file": "train.py", "lineno": 819}}
+:::MLL 1571724838.416 epoch_start: {"value": null, "metadata": {"epoch_num": 28, "file": "train.py", "lineno": 673}}
+Iteration:   3300, Loss function: 4.099, Average Loss: 4.179, avg. samples / sec: 4075.08
+Iteration:   3320, Loss function: 3.899, Average Loss: 4.174, avg. samples / sec: 4066.85
+Iteration:   3340, Loss function: 4.002, Average Loss: 4.170, avg. samples / sec: 4011.16
+Iteration:   3360, Loss function: 3.994, Average Loss: 4.166, avg. samples / sec: 4101.51
+Iteration:   3380, Loss function: 3.930, Average Loss: 4.162, avg. samples / sec: 4081.13
+Iteration:   3400, Loss function: 3.724, Average Loss: 4.158, avg. samples / sec: 4039.02
+Iteration:   3420, Loss function: 3.710, Average Loss: 4.155, avg. samples / sec: 4025.26
+:::MLL 1571724867.294 epoch_stop: {"value": null, "metadata": {"epoch_num": 28, "file": "train.py", "lineno": 819}}
+:::MLL 1571724867.294 epoch_start: {"value": null, "metadata": {"epoch_num": 29, "file": "train.py", "lineno": 673}}
+Iteration:   3440, Loss function: 3.705, Average Loss: 4.149, avg. samples / sec: 4011.03
+Iteration:   3460, Loss function: 3.986, Average Loss: 4.146, avg. samples / sec: 4070.37
+Iteration:   3480, Loss function: 3.904, Average Loss: 4.141, avg. samples / sec: 4092.31
+Iteration:   3500, Loss function: 3.819, Average Loss: 4.137, avg. samples / sec: 4040.70
+Iteration:   3520, Loss function: 3.712, Average Loss: 4.134, avg. samples / sec: 4024.86
+Iteration:   3540, Loss function: 4.127, Average Loss: 4.130, avg. samples / sec: 4068.41
+:::MLL 1571724896.206 epoch_stop: {"value": null, "metadata": {"epoch_num": 29, "file": "train.py", "lineno": 819}}
+:::MLL 1571724896.207 epoch_start: {"value": null, "metadata": {"epoch_num": 30, "file": "train.py", "lineno": 673}}
+Iteration:   3560, Loss function: 4.065, Average Loss: 4.126, avg. samples / sec: 4047.72
+Iteration:   3580, Loss function: 3.834, Average Loss: 4.121, avg. samples / sec: 4082.61
+Iteration:   3600, Loss function: 3.804, Average Loss: 4.117, avg. samples / sec: 4103.85
+Iteration:   3620, Loss function: 3.941, Average Loss: 4.113, avg. samples / sec: 4088.36
+Iteration:   3640, Loss function: 4.205, Average Loss: 4.111, avg. samples / sec: 4117.34
+Iteration:   3660, Loss function: 3.566, Average Loss: 4.107, avg. samples / sec: 4098.41
+:::MLL 1571724924.864 epoch_stop: {"value": null, "metadata": {"epoch_num": 30, "file": "train.py", "lineno": 819}}
+:::MLL 1571724924.864 epoch_start: {"value": null, "metadata": {"epoch_num": 31, "file": "train.py", "lineno": 673}}
+Iteration:   3680, Loss function: 3.894, Average Loss: 4.103, avg. samples / sec: 4068.52
+Iteration:   3700, Loss function: 3.930, Average Loss: 4.100, avg. samples / sec: 4057.68
+Iteration:   3720, Loss function: 3.947, Average Loss: 4.096, avg. samples / sec: 4049.55
+Iteration:   3740, Loss function: 3.765, Average Loss: 4.092, avg. samples / sec: 4091.81
+Iteration:   3760, Loss function: 3.975, Average Loss: 4.088, avg. samples / sec: 4078.24
+Iteration:   3780, Loss function: 3.653, Average Loss: 4.085, avg. samples / sec: 4080.24
+:::MLL 1571724953.597 epoch_stop: {"value": null, "metadata": {"epoch_num": 31, "file": "train.py", "lineno": 819}}
+:::MLL 1571724953.597 epoch_start: {"value": null, "metadata": {"epoch_num": 32, "file": "train.py", "lineno": 673}}
+Iteration:   3800, Loss function: 3.993, Average Loss: 4.081, avg. samples / sec: 4048.43
+Iteration:   3820, Loss function: 4.105, Average Loss: 4.077, avg. samples / sec: 4062.85
+Iteration:   3840, Loss function: 4.041, Average Loss: 4.073, avg. samples / sec: 4072.34
+Iteration:   3860, Loss function: 3.715, Average Loss: 4.070, avg. samples / sec: 4081.25
+Iteration:   3880, Loss function: 3.881, Average Loss: 4.067, avg. samples / sec: 4069.53
+Iteration:   3900, Loss function: 3.987, Average Loss: 4.065, avg. samples / sec: 4040.92
+:::MLL 1571724982.438 epoch_stop: {"value": null, "metadata": {"epoch_num": 32, "file": "train.py", "lineno": 819}}
+:::MLL 1571724982.439 epoch_start: {"value": null, "metadata": {"epoch_num": 33, "file": "train.py", "lineno": 673}}
+Iteration:   3920, Loss function: 3.788, Average Loss: 4.062, avg. samples / sec: 4061.49
+Iteration:   3940, Loss function: 3.901, Average Loss: 4.058, avg. samples / sec: 4023.65
+Iteration:   3960, Loss function: 3.841, Average Loss: 4.054, avg. samples / sec: 4054.81
+Iteration:   3980, Loss function: 3.907, Average Loss: 4.050, avg. samples / sec: 4090.83
+Iteration:   4000, Loss function: 3.873, Average Loss: 4.044, avg. samples / sec: 4041.07
+:::MLL 1571725004.260 eval_start: {"value": null, "metadata": {"epoch_num": 33, "file": "train.py", "lineno": 276}}
+Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 2/4Parsing batch: 1/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 2/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Predicting Ended, total time: 9.19 s
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+DONE (t=0.43s)
+DONE (t=0.43s)
+DONE (t=0.43s)
+DONE (t=0.43s)
+DONE (t=0.43s)
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.44s)
+DONE (t=0.48s)
+DONE (t=0.48s)
+DONE (t=2.71s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.17395
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.31970
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.17551
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.04686
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.18192
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.28704
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.18563
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.27196
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.28756
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.08286
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.30562
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.46047
+Current AP: 0.17395 AP goal: 0.23000
+:::MLL 1571725016.650 eval_accuracy: {"value": 0.17394960420727448, "metadata": {"epoch_num": 33, "file": "train.py", "lineno": 389}}
+:::MLL 1571725017.523 eval_stop: {"value": null, "metadata": {"epoch_num": 33, "file": "train.py", "lineno": 392}}
+:::MLL 1571725017.554 block_stop: {"value": null, "metadata": {"first_epoch_num": 1, "file": "train.py", "lineno": 804}}
+:::MLL 1571725017.555 block_start: {"value": null, "metadata": {"first_epoch_num": 33, "epoch_count": 10.915354834308324, "file": "train.py", "lineno": 813}}
+Iteration:   4020, Loss function: 3.765, Average Loss: 4.041, avg. samples / sec: 1013.78
+:::MLL 1571725025.810 epoch_stop: {"value": null, "metadata": {"epoch_num": 33, "file": "train.py", "lineno": 819}}
+:::MLL 1571725025.810 epoch_start: {"value": null, "metadata": {"epoch_num": 34, "file": "train.py", "lineno": 673}}
+Iteration:   4040, Loss function: 3.875, Average Loss: 4.038, avg. samples / sec: 3991.66
+Iteration:   4060, Loss function: 3.895, Average Loss: 4.035, avg. samples / sec: 4069.24
+Iteration:   4080, Loss function: 3.614, Average Loss: 4.032, avg. samples / sec: 4104.63
+Iteration:   4100, Loss function: 3.859, Average Loss: 4.028, avg. samples / sec: 4101.85
+Iteration:   4120, Loss function: 3.797, Average Loss: 4.025, avg. samples / sec: 4041.67
+Iteration:   4140, Loss function: 3.927, Average Loss: 4.022, avg. samples / sec: 4067.66
+:::MLL 1571725054.622 epoch_stop: {"value": null, "metadata": {"epoch_num": 34, "file": "train.py", "lineno": 819}}
+:::MLL 1571725054.623 epoch_start: {"value": null, "metadata": {"epoch_num": 35, "file": "train.py", "lineno": 673}}
+Iteration:   4160, Loss function: 3.490, Average Loss: 4.019, avg. samples / sec: 4019.78
+Iteration:   4180, Loss function: 3.970, Average Loss: 4.015, avg. samples / sec: 4007.07
+Iteration:   4200, Loss function: 3.910, Average Loss: 4.012, avg. samples / sec: 4048.27
+Iteration:   4220, Loss function: 3.875, Average Loss: 4.010, avg. samples / sec: 4049.86
+Iteration:   4240, Loss function: 3.631, Average Loss: 4.006, avg. samples / sec: 4020.22
+Iteration:   4260, Loss function: 3.908, Average Loss: 4.003, avg. samples / sec: 4084.62
+:::MLL 1571725083.630 epoch_stop: {"value": null, "metadata": {"epoch_num": 35, "file": "train.py", "lineno": 819}}
+:::MLL 1571725083.631 epoch_start: {"value": null, "metadata": {"epoch_num": 36, "file": "train.py", "lineno": 673}}
+Iteration:   4280, Loss function: 3.921, Average Loss: 4.000, avg. samples / sec: 4019.69
+Iteration:   4300, Loss function: 4.061, Average Loss: 3.998, avg. samples / sec: 4047.92
+Iteration:   4320, Loss function: 3.779, Average Loss: 3.993, avg. samples / sec: 4057.60
+Iteration:   4340, Loss function: 3.926, Average Loss: 3.990, avg. samples / sec: 4030.60
+Iteration:   4360, Loss function: 3.768, Average Loss: 3.986, avg. samples / sec: 4071.22
+Iteration:   4380, Loss function: 3.703, Average Loss: 3.984, avg. samples / sec: 4024.17
+:::MLL 1571725112.554 epoch_stop: {"value": null, "metadata": {"epoch_num": 36, "file": "train.py", "lineno": 819}}
+:::MLL 1571725112.554 epoch_start: {"value": null, "metadata": {"epoch_num": 37, "file": "train.py", "lineno": 673}}
+Iteration:   4400, Loss function: 3.670, Average Loss: 3.980, avg. samples / sec: 4063.62
+Iteration:   4420, Loss function: 3.764, Average Loss: 3.977, avg. samples / sec: 4039.43
+Iteration:   4440, Loss function: 3.410, Average Loss: 3.974, avg. samples / sec: 4105.15
+Iteration:   4460, Loss function: 4.034, Average Loss: 3.972, avg. samples / sec: 4065.34
+Iteration:   4480, Loss function: 3.804, Average Loss: 3.969, avg. samples / sec: 4070.78
+Iteration:   4500, Loss function: 4.013, Average Loss: 3.967, avg. samples / sec: 4053.91
+:::MLL 1571725141.387 epoch_stop: {"value": null, "metadata": {"epoch_num": 37, "file": "train.py", "lineno": 819}}
+:::MLL 1571725141.388 epoch_start: {"value": null, "metadata": {"epoch_num": 38, "file": "train.py", "lineno": 673}}
+Iteration:   4520, Loss function: 4.058, Average Loss: 3.964, avg. samples / sec: 4051.45
+Iteration:   4540, Loss function: 3.968, Average Loss: 3.961, avg. samples / sec: 4009.73
+Iteration:   4560, Loss function: 3.800, Average Loss: 3.959, avg. samples / sec: 4083.33
+Iteration:   4580, Loss function: 3.783, Average Loss: 3.955, avg. samples / sec: 4051.81
+Iteration:   4600, Loss function: 3.911, Average Loss: 3.952, avg. samples / sec: 4053.26
+Iteration:   4620, Loss function: 3.578, Average Loss: 3.949, avg. samples / sec: 4098.86
+Iteration:   4640, Loss function: 3.931, Average Loss: 3.947, avg. samples / sec: 4009.29
+:::MLL 1571725170.319 epoch_stop: {"value": null, "metadata": {"epoch_num": 38, "file": "train.py", "lineno": 819}}
+:::MLL 1571725170.319 epoch_start: {"value": null, "metadata": {"epoch_num": 39, "file": "train.py", "lineno": 673}}
+Iteration:   4660, Loss function: 3.677, Average Loss: 3.944, avg. samples / sec: 4092.23
+Iteration:   4680, Loss function: 3.737, Average Loss: 3.940, avg. samples / sec: 4031.82
+Iteration:   4700, Loss function: 3.592, Average Loss: 3.938, avg. samples / sec: 4066.82
+Iteration:   4720, Loss function: 3.824, Average Loss: 3.935, avg. samples / sec: 4052.96
+Iteration:   4740, Loss function: 3.626, Average Loss: 3.933, avg. samples / sec: 3999.03
+Iteration:   4760, Loss function: 3.916, Average Loss: 3.931, avg. samples / sec: 4004.99
+:::MLL 1571725199.288 epoch_stop: {"value": null, "metadata": {"epoch_num": 39, "file": "train.py", "lineno": 819}}
+:::MLL 1571725199.288 epoch_start: {"value": null, "metadata": {"epoch_num": 40, "file": "train.py", "lineno": 673}}
+Iteration:   4780, Loss function: 4.075, Average Loss: 3.928, avg. samples / sec: 4025.97
+Iteration:   4800, Loss function: 3.635, Average Loss: 3.925, avg. samples / sec: 4048.41
+Iteration:   4820, Loss function: 3.762, Average Loss: 3.922, avg. samples / sec: 4058.49
+Iteration:   4840, Loss function: 3.907, Average Loss: 3.919, avg. samples / sec: 4058.32
+Iteration:   4860, Loss function: 3.676, Average Loss: 3.916, avg. samples / sec: 4068.42
+Iteration:   4880, Loss function: 3.917, Average Loss: 3.913, avg. samples / sec: 4067.19
+:::MLL 1571725228.425 epoch_stop: {"value": null, "metadata": {"epoch_num": 40, "file": "train.py", "lineno": 819}}
+:::MLL 1571725228.425 epoch_start: {"value": null, "metadata": {"epoch_num": 41, "file": "train.py", "lineno": 673}}
+Iteration:   4900, Loss function: 3.783, Average Loss: 3.910, avg. samples / sec: 4027.24
+Iteration:   4920, Loss function: 3.424, Average Loss: 3.907, avg. samples / sec: 4062.45
+Iteration:   4940, Loss function: 3.603, Average Loss: 3.904, avg. samples / sec: 4038.13
+Iteration:   4960, Loss function: 3.638, Average Loss: 3.900, avg. samples / sec: 4008.05
+Iteration:   4980, Loss function: 3.843, Average Loss: 3.897, avg. samples / sec: 4034.76
+Iteration:   5000, Loss function: 3.607, Average Loss: 3.896, avg. samples / sec: 4039.53
+:::MLL 1571725257.477 epoch_stop: {"value": null, "metadata": {"epoch_num": 41, "file": "train.py", "lineno": 819}}
+:::MLL 1571725257.478 epoch_start: {"value": null, "metadata": {"epoch_num": 42, "file": "train.py", "lineno": 673}}
+Iteration:   5020, Loss function: 3.625, Average Loss: 3.894, avg. samples / sec: 4007.76
+Iteration:   5040, Loss function: 3.656, Average Loss: 3.891, avg. samples / sec: 4044.68
+Iteration:   5060, Loss function: 3.980, Average Loss: 3.889, avg. samples / sec: 4083.74
+Iteration:   5080, Loss function: 3.917, Average Loss: 3.888, avg. samples / sec: 3992.15
+Iteration:   5100, Loss function: 3.873, Average Loss: 3.885, avg. samples / sec: 4091.14
+Iteration:   5120, Loss function: 3.885, Average Loss: 3.883, avg. samples / sec: 4026.76
+:::MLL 1571725286.444 epoch_stop: {"value": null, "metadata": {"epoch_num": 42, "file": "train.py", "lineno": 819}}
+:::MLL 1571725286.444 epoch_start: {"value": null, "metadata": {"epoch_num": 43, "file": "train.py", "lineno": 673}}
+Iteration:   5140, Loss function: 3.363, Average Loss: 3.880, avg. samples / sec: 3977.09
+Iteration:   5160, Loss function: 3.565, Average Loss: 3.877, avg. samples / sec: 4014.49
+Iteration:   5180, Loss function: 3.499, Average Loss: 3.874, avg. samples / sec: 4022.57
+Iteration:   5200, Loss function: 4.002, Average Loss: 3.871, avg. samples / sec: 4104.73
+Iteration:   5220, Loss function: 3.818, Average Loss: 3.867, avg. samples / sec: 4066.60
+Iteration:   5240, Loss function: 3.515, Average Loss: 3.865, avg. samples / sec: 4097.32
+:::MLL 1571725315.377 epoch_stop: {"value": null, "metadata": {"epoch_num": 43, "file": "train.py", "lineno": 819}}
+:::MLL 1571725315.377 epoch_start: {"value": null, "metadata": {"epoch_num": 44, "file": "train.py", "lineno": 673}}
+Iteration:   5260, Loss function: 3.733, Average Loss: 3.862, avg. samples / sec: 4057.96
+Iteration:   5280, Loss function: 3.874, Average Loss: 3.858, avg. samples / sec: 3993.75
+Iteration:   5300, Loss function: 3.918, Average Loss: 3.856, avg. samples / sec: 4062.08
+Iteration:   5320, Loss function: 3.618, Average Loss: 3.854, avg. samples / sec: 4033.26
+lr decay step #1
+:::MLL 1571725334.656 eval_start: {"value": null, "metadata": {"epoch_num": 44, "file": "train.py", "lineno": 276}}
+Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Predicting Ended, total time: 6.72 s
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+DONE (t=0.51s)
+DONE (t=0.52s)
+DONE (t=0.52s)
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.52s)
+DONE (t=0.64s)
+DONE (t=0.64s)
+DONE (t=0.64s)
+DONE (t=0.64s)
+DONE (t=2.60s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.18186
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.33065
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.18188
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.04903
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.18855
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.29668
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.19072
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.27853
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.29346
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.08677
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.30887
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.46375
+Current AP: 0.18186 AP goal: 0.23000
+:::MLL 1571725344.554 eval_accuracy: {"value": 0.18186473992778118, "metadata": {"epoch_num": 44, "file": "train.py", "lineno": 389}}
+:::MLL 1571725345.591 eval_stop: {"value": null, "metadata": {"epoch_num": 44, "file": "train.py", "lineno": 392}}
+:::MLL 1571725345.622 block_stop: {"value": null, "metadata": {"first_epoch_num": 33, "file": "train.py", "lineno": 804}}
+:::MLL 1571725345.623 block_start: {"value": null, "metadata": {"first_epoch_num": 44, "epoch_count": 5.457677417154162, "file": "train.py", "lineno": 813}}
+Iteration:   5340, Loss function: 3.468, Average Loss: 3.850, avg. samples / sec: 1216.99
+Iteration:   5360, Loss function: 3.527, Average Loss: 3.845, avg. samples / sec: 4043.10
+:::MLL 1571725355.409 epoch_stop: {"value": null, "metadata": {"epoch_num": 44, "file": "train.py", "lineno": 819}}
+:::MLL 1571725355.410 epoch_start: {"value": null, "metadata": {"epoch_num": 45, "file": "train.py", "lineno": 673}}
+Iteration:   5380, Loss function: 3.435, Average Loss: 3.839, avg. samples / sec: 4008.30
+Iteration:   5400, Loss function: 3.423, Average Loss: 3.832, avg. samples / sec: 4042.17
+Iteration:   5420, Loss function: 3.111, Average Loss: 3.823, avg. samples / sec: 4001.29
+Iteration:   5440, Loss function: 3.248, Average Loss: 3.814, avg. samples / sec: 4057.74
+Iteration:   5460, Loss function: 3.591, Average Loss: 3.805, avg. samples / sec: 4057.05
+Iteration:   5480, Loss function: 3.234, Average Loss: 3.797, avg. samples / sec: 4055.13
+:::MLL 1571725384.411 epoch_stop: {"value": null, "metadata": {"epoch_num": 45, "file": "train.py", "lineno": 819}}
+:::MLL 1571725384.412 epoch_start: {"value": null, "metadata": {"epoch_num": 46, "file": "train.py", "lineno": 673}}
+Iteration:   5500, Loss function: 3.297, Average Loss: 3.789, avg. samples / sec: 4029.63
+Iteration:   5520, Loss function: 3.414, Average Loss: 3.781, avg. samples / sec: 4032.99
+Iteration:   5540, Loss function: 3.246, Average Loss: 3.773, avg. samples / sec: 4030.82
+Iteration:   5560, Loss function: 3.386, Average Loss: 3.764, avg. samples / sec: 4047.40
+Iteration:   5580, Loss function: 3.529, Average Loss: 3.757, avg. samples / sec: 4100.09
+Iteration:   5600, Loss function: 3.281, Average Loss: 3.747, avg. samples / sec: 4088.93
+:::MLL 1571725413.272 epoch_stop: {"value": null, "metadata": {"epoch_num": 46, "file": "train.py", "lineno": 819}}
+:::MLL 1571725413.273 epoch_start: {"value": null, "metadata": {"epoch_num": 47, "file": "train.py", "lineno": 673}}
+Iteration:   5620, Loss function: 3.169, Average Loss: 3.740, avg. samples / sec: 4058.48
+Iteration:   5640, Loss function: 3.202, Average Loss: 3.732, avg. samples / sec: 4059.01
+Iteration:   5660, Loss function: 3.571, Average Loss: 3.725, avg. samples / sec: 4057.41
+Iteration:   5680, Loss function: 3.281, Average Loss: 3.718, avg. samples / sec: 4042.40
+Iteration:   5700, Loss function: 3.320, Average Loss: 3.711, avg. samples / sec: 4092.16
+Iteration:   5720, Loss function: 3.349, Average Loss: 3.704, avg. samples / sec: 4056.76
+Iteration:   5740, Loss function: 3.585, Average Loss: 3.698, avg. samples / sec: 4068.58
+:::MLL 1571725442.363 epoch_stop: {"value": null, "metadata": {"epoch_num": 47, "file": "train.py", "lineno": 819}}
+:::MLL 1571725442.363 epoch_start: {"value": null, "metadata": {"epoch_num": 48, "file": "train.py", "lineno": 673}}
+Iteration:   5760, Loss function: 3.310, Average Loss: 3.690, avg. samples / sec: 4004.08
+Iteration:   5780, Loss function: 3.456, Average Loss: 3.682, avg. samples / sec: 4001.18
+Iteration:   5800, Loss function: 3.441, Average Loss: 3.675, avg. samples / sec: 4014.60
+Iteration:   5820, Loss function: 3.253, Average Loss: 3.668, avg. samples / sec: 4076.09
+Iteration:   5840, Loss function: 3.451, Average Loss: 3.662, avg. samples / sec: 4062.21
+Iteration:   5860, Loss function: 3.478, Average Loss: 3.656, avg. samples / sec: 4081.91
+:::MLL 1571725471.347 epoch_stop: {"value": null, "metadata": {"epoch_num": 48, "file": "train.py", "lineno": 819}}
+:::MLL 1571725471.348 epoch_start: {"value": null, "metadata": {"epoch_num": 49, "file": "train.py", "lineno": 673}}
+Iteration:   5880, Loss function: 3.369, Average Loss: 3.648, avg. samples / sec: 3983.04
+Iteration:   5900, Loss function: 3.339, Average Loss: 3.642, avg. samples / sec: 4069.15
+Iteration:   5920, Loss function: 3.374, Average Loss: 3.635, avg. samples / sec: 4107.65
+Iteration:   5940, Loss function: 3.411, Average Loss: 3.628, avg. samples / sec: 4056.36
+Iteration:   5960, Loss function: 3.212, Average Loss: 3.621, avg. samples / sec: 4046.29
+Iteration:   5980, Loss function: 3.049, Average Loss: 3.614, avg. samples / sec: 4035.54
+:::MLL 1571725500.251 epoch_stop: {"value": null, "metadata": {"epoch_num": 49, "file": "train.py", "lineno": 819}}
+:::MLL 1571725500.252 epoch_start: {"value": null, "metadata": {"epoch_num": 50, "file": "train.py", "lineno": 673}}
+Iteration:   6000, Loss function: 3.427, Average Loss: 3.608, avg. samples / sec: 4059.36
+:::MLL 1571725503.832 eval_start: {"value": null, "metadata": {"epoch_num": 50, "file": "train.py", "lineno": 276}}
+Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 0/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 1/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 2/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Parsing batch: 3/4Predicting Ended, total time: 6.88 s
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+Loading and preparing results...
+DONE (t=0.50s)
+DONE (t=0.52s)
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.53s)
+DONE (t=0.53s)
+DONE (t=0.63s)
+DONE (t=0.65s)
+DONE (t=0.65s)
+DONE (t=0.65s)
+DONE (t=2.63s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.23041
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.39420
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.23858
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.06335
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.24020
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.37680
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.22230
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.32446
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.34072
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.10281
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.36813
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.53425
+Current AP: 0.23041 AP goal: 0.23000
+:::MLL 1571725513.914 eval_accuracy: {"value": 0.23040523254755566, "metadata": {"epoch_num": 50, "file": "train.py", "lineno": 389}}
+:::MLL 1571725515.026 eval_stop: {"value": null, "metadata": {"epoch_num": 50, "file": "train.py", "lineno": 392}}
+:::MLL 1571725515.057 block_stop: {"value": null, "metadata": {"first_epoch_num": 44, "file": "train.py", "lineno": 804}}
+:::MLL 1571725515.889 run_stop: {"value": null, "metadata": {"status": "success", "file": "train.py", "lineno": 849}}
+Binding: ['/usr/bin/numactl', '--physcpubind=0-1,16-17', '--membind=0', '/opt/conda/bin/python', '-u', 'train.py', '--local_rank=0', '--use-fp16', '--nhwc', '--pad-input', '--jit', '--delay-allreduce', '--opt-loss', '--epochs', '80', '--warmup-factor', '0', '--no-save', '--threshold=0.23', '--data', '/data/coco2017', '--evaluation', '120000', '160000', '180000', '200000', '220000', '240000', '260000', '280000', '--batch-size', '120', '--eval-batch-size', '160', '--warmup', '650', '--lr', '2.92e-3', '--wd', '1.6e-4', '--use-nvjpeg', '--use-roi-decode']
+Binding: ['/usr/bin/numactl', '--physcpubind=2-3,18-19', '--membind=0', '/opt/conda/bin/python', '-u', 'train.py', '--local_rank=1', '--use-fp16', '--nhwc', '--pad-input', '--jit', '--delay-allreduce', '--opt-loss', '--epochs', '80', '--warmup-factor', '0', '--no-save', '--threshold=0.23', '--data', '/data/coco2017', '--evaluation', '120000', '160000', '180000', '200000', '220000', '240000', '260000', '280000', '--batch-size', '120', '--eval-batch-size', '160', '--warmup', '650', '--lr', '2.92e-3', '--wd', '1.6e-4', '--use-nvjpeg', '--use-roi-decode']
+Binding: ['/usr/bin/numactl', '--physcpubind=4-5,20-21', '--membind=0', '/opt/conda/bin/python', '-u', 'train.py', '--local_rank=2', '--use-fp16', '--nhwc', '--pad-input', '--jit', '--delay-allreduce', '--opt-loss', '--epochs', '80', '--warmup-factor', '0', '--no-save', '--threshold=0.23', '--data', '/data/coco2017', '--evaluation', '120000', '160000', '180000', '200000', '220000', '240000', '260000', '280000', '--batch-size', '120', '--eval-batch-size', '160', '--warmup', '650', '--lr', '2.92e-3', '--wd', '1.6e-4', '--use-nvjpeg', '--use-roi-decode']
+Binding: ['/usr/bin/numactl', '--physcpubind=6-7,22-23', '--membind=0', '/opt/conda/bin/python', '-u', 'train.py', '--local_rank=3', '--use-fp16', '--nhwc', '--pad-input', '--jit', '--delay-allreduce', '--opt-loss', '--epochs', '80', '--warmup-factor', '0', '--no-save', '--threshold=0.23', '--data', '/data/coco2017', '--evaluation', '120000', '160000', '180000', '200000', '220000', '240000', '260000', '280000', '--batch-size', '120', '--eval-batch-size', '160', '--warmup', '650', '--lr', '2.92e-3', '--wd', '1.6e-4', '--use-nvjpeg', '--use-roi-decode']
+Binding: ['/usr/bin/numactl', '--physcpubind=8-9,24-25', '--membind=1', '/opt/conda/bin/python', '-u', 'train.py', '--local_rank=4', '--use-fp16', '--nhwc', '--pad-input', '--jit', '--delay-allreduce', '--opt-loss', '--epochs', '80', '--warmup-factor', '0', '--no-save', '--threshold=0.23', '--data', '/data/coco2017', '--evaluation', '120000', '160000', '180000', '200000', '220000', '240000', '260000', '280000', '--batch-size', '120', '--eval-batch-size', '160', '--warmup', '650', '--lr', '2.92e-3', '--wd', '1.6e-4', '--use-nvjpeg', '--use-roi-decode']
+Binding: ['/usr/bin/numactl', '--physcpubind=10-11,26-27', '--membind=1', '/opt/conda/bin/python', '-u', 'train.py', '--local_rank=5', '--use-fp16', '--nhwc', '--pad-input', '--jit', '--delay-allreduce', '--opt-loss', '--epochs', '80', '--warmup-factor', '0', '--no-save', '--threshold=0.23', '--data', '/data/coco2017', '--evaluation', '120000', '160000', '180000', '200000', '220000', '240000', '260000', '280000', '--batch-size', '120', '--eval-batch-size', '160', '--warmup', '650', '--lr', '2.92e-3', '--wd', '1.6e-4', '--use-nvjpeg', '--use-roi-decode']
+Binding: ['/usr/bin/numactl', '--physcpubind=12-13,28-29', '--membind=1', '/opt/conda/bin/python', '-u', 'train.py', '--local_rank=6', '--use-fp16', '--nhwc', '--pad-input', '--jit', '--delay-allreduce', '--opt-loss', '--epochs', '80', '--warmup-factor', '0', '--no-save', '--threshold=0.23', '--data', '/data/coco2017', '--evaluation', '120000', '160000', '180000', '200000', '220000', '240000', '260000', '280000', '--batch-size', '120', '--eval-batch-size', '160', '--warmup', '650', '--lr', '2.92e-3', '--wd', '1.6e-4', '--use-nvjpeg', '--use-roi-decode']
+Binding: ['/usr/bin/numactl', '--physcpubind=14-15,30-31', '--membind=1', '/opt/conda/bin/python', '-u', 'train.py', '--local_rank=7', '--use-fp16', '--nhwc', '--pad-input', '--jit', '--delay-allreduce', '--opt-loss', '--epochs', '80', '--warmup-factor', '0', '--no-save', '--threshold=0.23', '--data', '/data/coco2017', '--evaluation', '120000', '160000', '180000', '200000', '220000', '240000', '260000', '280000', '--batch-size', '120', '--eval-batch-size', '160', '--warmup', '650', '--lr', '2.92e-3', '--wd', '1.6e-4', '--use-nvjpeg', '--use-roi-decode']
++ ret_code=0
++ set +x
+ENDING TIMING RUN AT 2019-10-22 06:25:22 AM
+RESULT,SINGLE_STAGE_DETECTOR,,1504,nvidia,2019-10-22 06:00:18 AM

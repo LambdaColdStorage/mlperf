@@ -3,6 +3,7 @@
 ### Prepare Dataset
 
 ```
+cd data_preparation
 
 virtualenv -p /usr/bin/python3.6 venv-compile
 . venv-compile/bin/activate
@@ -25,10 +26,19 @@ rm fairseq/data/*.so
 
 ```
 docker build --pull -t mlperf-lambda:transformer .
+
+docker build --pull -t mlperf-nvidia:translation .
 ```
 
 ### Run Benchmark
 
 ```
 DATADIR=/home/ubuntu/data/mlperf/transformer/examples/transformer/wmt14_en_de/utf8 PULL=0 LAMBDASYSTEM=Lambda_dual_basic ./run.sub
+
+DATADIR=/home/ubuntu/data/mlperf/translation/examples/translation/wmt14_en_de/utf8 LOGDIR=/home/ubuntu/benchmarks/mlperf/translation PULL=0 LAMBDASYSTEM=DGX1 ./run.sub
 ```
+
+
+### Notes
+
+The download data part in the original `mlperf/training_results_v0.6` is broken (or supposedly to be run in side of a docker). Need a seperate sub-folder for doing it. 
