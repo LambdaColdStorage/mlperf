@@ -16,3 +16,8 @@ distribution=$(. /etc/os-release;echo $ID$VERSION_ID) && curl -s -L https://nvid
 sudo apt-get update
 sudo apt install nvidia-docker2 -y
 sudo pkill -SIGHUP dockerd
+
+
+USER=ubuntu
+sudo groupadd docker
+sudo usermod -aG docker $USER
