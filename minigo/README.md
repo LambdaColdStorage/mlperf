@@ -30,7 +30,7 @@ NEXP=1 CONT=mlperf-lambda:minigo PULL=0 LAMBDASYSTEM=Lambda_hyperplane_basic ./r
 ### Important Settings
 
 __config.sh__
-- LAMBDASOCKETCORES: Need to be set as total_num_gpu_cores / num_gpus
+- LAMBDASOCKETCORES: Need to be set as total_num_cpu_cores / num_gpus
 
 - __NEXP__ number of trails for running the benchmark. Set to 1 to save time.
 
